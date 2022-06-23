@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:injectable/injectable.dart';
+import 'package:metrics_viewer/auth_guard.dart';
 import 'package:metrics_viewer/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:metrics_viewer/login_page.dart';
@@ -12,6 +14,8 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: '/',
       page: HomePage,
+      initial: true,
+      guards: [AuthGuard],
     ),
     AutoRoute(
       path: '/login',
@@ -23,4 +27,9 @@ part 'app_router.gr.dart';
     ),
   ],
 )
-class AppRouter extends _$AppRouter{}
+@lazySingleton
+class AppRouter extends _$AppRouter {
+  AppRouter({
+    required super.authGuard,
+  });
+}
