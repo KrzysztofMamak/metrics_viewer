@@ -7,7 +7,9 @@ import 'package:metrics_viewer/sign_in_form_bloc/sign_in_form_bloc.dart';
 import 'package:metrics_viewer/util/ext/build_context_ext.dart';
 
 class LoginPage extends HookWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({
+    Key? key,
+  }) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
 
@@ -33,66 +35,70 @@ class LoginPage extends HookWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: BlocBuilder<SignInFormBloc, SignInFormState>(
-                  builder: (context, state) {
-                if (state.isSubmitting) {
-                  return CircularProgressIndicator();
-                } else if (state.authFailureOrSuccessOption.isSome()) {
-                  return Icon(Icons.clear);
-                }
-                return Form(
-                  key: _formKey,
-                  autovalidateMode: state.showErrorMessages
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: emailController,
-                        validator: context.validator.validateEmailAddress,
-                        decoration: InputDecoration(
-                          hintText: 'Email',
+                builder: (context, state) {
+                  if (state.isSubmitting) {
+                    return CircularProgressIndicator();
+                  } else if (state.authFailureOrSuccessOption.isSome()) {
+                    return Icon(Icons.clear);
+                  }
+                  return Form(
+                    key: _formKey,
+                    autovalidateMode: state.showErrorMessages
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: emailController,
+                          validator: context.validator.validateEmailAddress,
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                          ),
+                          onChanged: (val) {
+                            context
+                                .read<SignInFormBloc>()
+                                .add(EmailChanged(val));
+                          },
                         ),
-                        onChanged: (val) {
-                          context.read<SignInFormBloc>().add(EmailChanged(val));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: passwordController,
-                        validator: context.validator.validateNotEmpty,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
+                        const SizedBox(
+                          height: 20,
                         ),
-                        onChanged: (val) {
-                          context
-                              .read<SignInFormBloc>()
-                              .add(PasswordChanged(val));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          getIt.get<AppRouter>().pushNamed('/registration');
-                        },
-                        child: const Text('CREATE ACCOUNT'),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<SignInFormBloc>().add(SignInPressed());
-                        },
-                        child: const Text('LOGIN'),
-                      ),
-                    ],
-                  ),
-                );
-              }),
+                        TextFormField(
+                          controller: passwordController,
+                          validator: context.validator.validateNotEmpty,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                          ),
+                          onChanged: (val) {
+                            context
+                                .read<SignInFormBloc>()
+                                .add(PasswordChanged(val));
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            getIt.get<AppRouter>().pushNamed('/registration');
+                          },
+                          child: const Text('CREATE ACCOUNT'),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.read<SignInFormBloc>().add(SignInPressed());
+                          },
+                          child: const Text('LOGIN'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
