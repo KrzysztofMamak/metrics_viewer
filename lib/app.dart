@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:metrics_viewer/app_router.dart';
+import 'package:metrics_viewer/injection.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -7,6 +9,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final router = getIt<AppRouter>();
+    return MaterialApp.router(
+      routeInformationParser: router.defaultRouteParser(),
+      routerDelegate: router.delegate(),
+    );
   }
 }
