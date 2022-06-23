@@ -4,9 +4,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metrics_viewer/app_router.dart';
 import 'package:metrics_viewer/injection/injection.dart';
 import 'package:metrics_viewer/sign_in_form_bloc/sign_in_form_bloc.dart';
+import 'package:metrics_viewer/util/ext/build_context_ext.dart';
 
 class LoginPage extends HookWidget {
   LoginPage({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +33,22 @@ class LoginPage extends HookWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: BlocBuilder<SignInFormBloc, SignInFormState>(
-                builder: (context, state) {
-                  if (state.isSubmitting) {
-                    return CircularProgressIndicator();
-                  } else if (state.authFailureOrSuccessOption.isSome()) {
-                    return Icon(Icons.clear);
-                  }
-                  return Column(
+                  builder: (context, state) {
+                if (state.isSubmitting) {
+                  return CircularProgressIndicator();
+                } else if (state.authFailureOrSuccessOption.isSome()) {
+                  return Icon(Icons.clear);
+                }
+                return Form(
+                  key: _formKey,
+                  autovalidateMode: state.showErrorMessages
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: Column(
                     children: [
                       TextFormField(
                         controller: emailController,
+                        validator: context.validator.validateEmailAddress,
                         decoration: InputDecoration(
                           hintText: 'Email',
                         ),
@@ -52,11 +61,14 @@ class LoginPage extends HookWidget {
                       ),
                       TextFormField(
                         controller: passwordController,
+                        validator: context.validator.validateNotEmpty,
                         decoration: InputDecoration(
                           hintText: 'Password',
                         ),
                         onChanged: (val) {
-                          context.read<SignInFormBloc>().add(PasswordChanged(val));
+                          context
+                              .read<SignInFormBloc>()
+                              .add(PasswordChanged(val));
                         },
                       ),
                       const SizedBox(
@@ -78,9 +90,9 @@ class LoginPage extends HookWidget {
                         child: const Text('LOGIN'),
                       ),
                     ],
-                  );
-                }
-              ),
+                  ),
+                );
+              }),
             ),
           ),
         ),
