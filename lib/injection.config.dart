@@ -28,12 +28,13 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final dioModule = _$DioModule();
   final loggerModule = _$LoggerModule();
-  final registerModule = _$RegisterModule();
+  final sharedPreferencesModule = _$SharedPreferencesModule();
   gh.factory<_i3.Dio>(() => dioModule.dio);
   gh.lazySingleton<_i4.IAuthRepository>(
       () => _i5.AuthRepository(get<_i3.Dio>()));
   gh.factory<_i6.Logger>(() => loggerModule.logger);
-  await gh.factoryAsync<_i7.SharedPreferences>(() => registerModule.prefs,
+  await gh.factoryAsync<_i7.SharedPreferences>(
+      () => sharedPreferencesModule.prefs,
       preResolve: true);
   gh.factory<_i8.SignInFormBloc>(
       () => _i8.SignInFormBloc(get<_i4.IAuthRepository>()));
@@ -49,4 +50,4 @@ class _$DioModule extends _i12.DioModule {}
 
 class _$LoggerModule extends _i13.LoggerModule {}
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$SharedPreferencesModule extends _i14.SharedPreferencesModule {}
