@@ -67,6 +67,7 @@ class LoginPage extends HookWidget {
                         TextFormField(
                           controller: passwordController,
                           validator: context.validator.validateNotEmpty,
+                          obscureText: true,
                           decoration: InputDecoration(
                             hintText: 'Password',
                           ),
