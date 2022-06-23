@@ -29,4 +29,25 @@ class Validator {
     }
     return null;
   }
+
+  // TODO -> use placeholder
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return _loc.inputErrorEmpty;
+    }
+    if (value.length < 8) {
+      return _loc.inputErrorEmptyWeakPassword;
+    }
+    return null;
+  }
+
+  String? validateRepeatedPassword(String? password, String? repeatedPassword) {
+    if (repeatedPassword == null || repeatedPassword.isEmpty) {
+      return _loc.inputErrorEmpty;
+    }
+    if (repeatedPassword != password) {
+      return _loc.inputErrorPasswordsMismatch;
+    }
+    return null;
+  }
 }
