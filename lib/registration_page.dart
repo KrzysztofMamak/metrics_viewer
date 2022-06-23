@@ -97,6 +97,9 @@ class RegistrationPage extends HookWidget {
                                 .add(RepeatedPasswordChanged(val));
                           },
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         TextButton(
                           onPressed: () {
                             context.read<SignupFormBloc>().add(SignupPressed());
