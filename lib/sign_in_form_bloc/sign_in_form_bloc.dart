@@ -26,22 +26,26 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     });
 
     on<SignInPressed>((event, emit) async {
-      emit(state.copyWith(isSubmitting: true));
+      if (state.emailAddress.isNotEmpty && state.password.isNotEmpty) {
+        emit(state.copyWith(isSubmitting: true));
 
-      await _authRepository.signIn(
-        LoginRequest(
-          emailAddress: state.emailAddress,
-          password: state.password,
-        ),
-      );
+        final failureOrSuccessOption = await _authRepository.signIn(
+          LoginRequest(
+            emailAddress: state.emailAddress,
+            password: state.password,
+          ),
+        );
 
-      emit(
-        state.copyWith(
-          isSubmitting: false,
-          authFailureOrSuccessOption: optionOf(left(AuthFailure())),
-          showErrorMessages: true,
-        ),
-      );
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            authFailureOrSuccessOption: optionOf(failureOrSuccessOption),
+            showErrorMessages: true,
+          ),
+        );
+      } else {
+        emit(state.copyWith(showErrorMessages: true));
+      }
     });
   }
 }
