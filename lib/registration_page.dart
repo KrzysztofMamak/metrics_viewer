@@ -67,6 +67,7 @@ class RegistrationPage extends HookWidget {
                         TextFormField(
                           controller: passwordController,
                           validator: context.validator.validatePassword,
+                          obscureText: true,
                           decoration: InputDecoration(
                             hintText: 'Password',
                           ),
@@ -83,9 +84,10 @@ class RegistrationPage extends HookWidget {
                           controller: repeatedPasswordController,
                           validator: (value) =>
                               context.validator.validateRepeatedPassword(
-                            repeatedPasswordController.text,
+                            passwordController.text,
                             value,
                           ),
+                          obscureText: true,
                           decoration: InputDecoration(
                             hintText: 'Repeat password',
                           ),
