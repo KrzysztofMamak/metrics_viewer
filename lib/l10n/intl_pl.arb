@@ -1,3 +1,5 @@
 {
-  "login": "Login"
+  "login": "Login",
+  "inputErrorInvalidEmailAddress": "Niepoprawny adres email",
+  "inputErrorEmpty": "Pole wymagane"
 }
