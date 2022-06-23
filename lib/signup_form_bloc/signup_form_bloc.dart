@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:metrics_viewer/auth_failure.dart';
 import 'package:metrics_viewer/i_auth_repository.dart';
 import 'package:metrics_viewer/login_request.dart';
+import 'package:metrics_viewer/util/validations/validations.dart';
 
 part 'signup_form_event.dart';
 
@@ -30,15 +31,8 @@ class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
     });
 
     on<SignupPressed>((event, emit) async {
-      emit(
-        state.copyWith(
-          showErrorMessages: true,
-        ),
-      );
-
-      if (state.password == state.repeatedPassword
-          // && email.isValid TODO
-          ) {
+      if (state.password == state.repeatedPassword &&
+          Validations.validateEmailAddress(state.emailAddress)) {
         emit(state.copyWith(isSubmitting: true));
 
         final signupResult = await _authRepository.signIn(
@@ -52,6 +46,12 @@ class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
           state.copyWith(
             isSubmitting: false,
             authFailureOrSuccessOption: optionOf(signupResult),
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            showErrorMessages: true,
           ),
         );
       }
