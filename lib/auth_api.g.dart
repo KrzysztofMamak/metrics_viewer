@@ -18,53 +18,48 @@ class _AuthApi implements AuthApi {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> auth() async {
+  Future<void> auth() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+    await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'GET', headers: _headers, extra: _extra)
             .compose(_dio.options, '',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
+    return null;
   }
 
   @override
-  Future<HttpResponse<dynamic>> signup(signupRequest) async {
+  Future<void> signup(signupRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(signupRequest.toJson());
-    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+    await _dio.fetch<void>(_setStreamType<void>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/signup',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
+    return null;
   }
 
   @override
-  Future<HttpResponse<dynamic>> signIn(loginRequest) async {
+  Future<String> signIn(loginRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(loginRequest.toJson());
-    final _result = await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
         Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(_dio.options, '/sign-in',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
+    final value = _result.data!;
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -10,11 +10,11 @@ abstract class AuthApi {
   factory AuthApi(Dio dio) = _AuthApi;
 
   @GET('')
-  Future<HttpResponse> auth();
+  Future<void> auth();
 
   @POST('/signup')
-  Future<HttpResponse> signup(@Body() SignupRequest signupRequest);
+  Future<void> signup(@Body() SignupRequest signupRequest);
 
   @POST('/sign-in')
-  Future<HttpResponse> signIn(@Body() LoginRequest loginRequest);
+  Future<String> signIn(@Body() LoginRequest loginRequest);
 }
