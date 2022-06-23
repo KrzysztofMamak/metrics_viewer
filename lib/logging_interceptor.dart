@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 
 class LoggingInterceptor extends Interceptor {
   final _logger = getIt.get<Logger>();

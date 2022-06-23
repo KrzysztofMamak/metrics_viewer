@@ -10,15 +10,15 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:logger/logger.dart' as _i6;
 import 'package:shared_preferences/shared_preferences.dart' as _i7;
 
-import 'app_router.dart' as _i11;
-import 'auth_guard.dart' as _i10;
-import 'auth_repository.dart' as _i5;
-import 'dio_module.dart' as _i12;
-import 'i_auth_repository.dart' as _i4;
-import 'logger_module.dart' as _i13;
-import 'shared_preferenses_module.dart' as _i14;
-import 'sign_in_form_bloc/sign_in_form_bloc.dart' as _i8;
-import 'signup_form_bloc/signup_form_bloc.dart'
+import '../app_router.dart' as _i11;
+import '../auth_guard.dart' as _i10;
+import '../auth_repository.dart' as _i5;
+import 'module/dio_module.dart' as _i12;
+import '../i_auth_repository.dart' as _i4;
+import 'module/logger_module.dart' as _i13;
+import 'module/shared_preferenses_module.dart' as _i14;
+import '../sign_in_form_bloc/sign_in_form_bloc.dart' as _i8;
+import '../signup_form_bloc/signup_form_bloc.dart'
     as _i9; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars

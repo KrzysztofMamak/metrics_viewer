@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metrics_viewer/app_router.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 
 class App extends StatelessWidget {
   const App({

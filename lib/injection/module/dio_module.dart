@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metrics_viewer/app_config.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 import 'package:metrics_viewer/logging_interceptor.dart';
 
 @module

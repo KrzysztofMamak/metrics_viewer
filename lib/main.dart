@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metrics_viewer/app.dart';
 import 'package:metrics_viewer/app_config_manager.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

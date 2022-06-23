@@ -2,7 +2,7 @@ import 'dart:convert' show jsonDecode;
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:metrics_viewer/app_config.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 
 abstract class AppConfigManager {
   static Future<void> configure() async {

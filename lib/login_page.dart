@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metrics_viewer/app_router.dart';
-import 'package:metrics_viewer/injection.dart';
+import 'package:metrics_viewer/injection/injection.dart';
 import 'package:metrics_viewer/sign_in_form_bloc/sign_in_form_bloc.dart';
 
 class LoginPage extends HookWidget {
