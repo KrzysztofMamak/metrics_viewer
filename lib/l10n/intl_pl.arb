@@ -1,5 +1,7 @@
 {
   "login": "Login",
   "inputErrorInvalidEmailAddress": "Niepoprawny adres email",
-  "inputErrorEmpty": "Pole wymagane"
+  "inputErrorEmpty": "Pole wymagane",
+  "inputErrorPasswordsMismatch": "Hasła nie są takie same",
+  "inputErrorEmptyWeakPassword": "Hasło musi zawierać conajmniej 8 znaków"
 }
