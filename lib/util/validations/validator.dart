@@ -30,13 +30,15 @@ class Validator {
     return null;
   }
 
-  // TODO -> use placeholder
-  String? validatePassword(String? value) {
+  String? validatePassword(
+    String? value, {
+    int minLength = 8,
+  }) {
     if (value == null || value.isEmpty) {
       return _loc.inputErrorEmpty;
     }
     if (value.length < 8) {
-      return _loc.inputErrorEmptyWeakPassword;
+      return _loc.inputErrorEmptyWeakPassword(minLength);
     }
     return null;
   }

@@ -3,5 +3,10 @@
   "inputErrorInvalidEmailAddress": "Invalid email address",
   "inputErrorEmpty": "This field is required",
   "inputErrorPasswordsMismatch": "Passwords don't match",
-  "inputErrorEmptyWeakPassword": "Password must have at least 8 characters"
+  "inputErrorEmptyWeakPassword": "Password must have at least {minLength} characters",
+  "@inputErrorEmptyWeakPassword": {
+    "placeholders": {
+      "minLength": {}
+    }
+  }
 }
