@@ -13,10 +13,10 @@ part 'signup_form_state.dart';
 part 'signup_form_bloc.freezed.dart';
 
 @injectable
-class SignUpFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
+class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
   final IAuthRepository _authRepository;
 
-  SignUpFormBloc(this._authRepository) : super(SignupFormState.initial()) {
+  SignupFormBloc(this._authRepository) : super(SignupFormState.initial()) {
     on<EmailChanged>((event, emit) {
       emit(state.copyWith(emailAddress: event.email));
     });

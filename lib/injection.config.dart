@@ -32,8 +32,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i6.Logger>(() => loggerModule.logger);
   gh.factory<_i7.SignInFormBloc>(
       () => _i7.SignInFormBloc(get<_i4.IAuthRepository>()));
-  gh.factory<_i8.SignUpFormBloc>(
-      () => _i8.SignUpFormBloc(get<_i4.IAuthRepository>()));
+  gh.factory<_i8.SignupFormBloc>(
+      () => _i8.SignupFormBloc(get<_i4.IAuthRepository>()));
   gh.factory<_i9.AuthGuard>(() => _i9.AuthGuard(get<_i4.IAuthRepository>()));
   gh.lazySingleton<_i10.AppRouter>(
       () => _i10.AppRouter(authGuard: get<_i9.AuthGuard>()));
