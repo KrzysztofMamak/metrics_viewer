@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metrics_viewer/app_router.dart';
 import 'package:metrics_viewer/i_auth_repository.dart';
 
 @injectable
@@ -13,7 +12,7 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     _authRepository.auth().then((failureOrUnit) {
       failureOrUnit.fold(
-        (l) => router.push(LoginRoute()),
+        (l) => router.pushNamed('/login'),
         (r) => resolver.next(),
       );
     });
