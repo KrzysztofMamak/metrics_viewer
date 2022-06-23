@@ -32,8 +32,10 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: LoginPage(key: args.key));
     },
     RegistrationRoute.name: (routeData) {
+      final args = routeData.argsAs<RegistrationRouteArgs>(
+          orElse: () => const RegistrationRouteArgs());
       return MaterialPageX<dynamic>(
-          routeData: routeData, child: const RegistrationPage());
+          routeData: routeData, child: RegistrationPage(key: args.key));
     }
   };
 
@@ -75,9 +77,21 @@ class LoginRouteArgs {
 
 /// generated route for
 /// [RegistrationPage]
-class RegistrationRoute extends PageRouteInfo<void> {
-  const RegistrationRoute()
-      : super(RegistrationRoute.name, path: '/registration');
+class RegistrationRoute extends PageRouteInfo<RegistrationRouteArgs> {
+  RegistrationRoute({Key? key})
+      : super(RegistrationRoute.name,
+            path: '/registration', args: RegistrationRouteArgs(key: key));
 
   static const String name = 'RegistrationRoute';
+}
+
+class RegistrationRouteArgs {
+  const RegistrationRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'RegistrationRouteArgs{key: $key}';
+  }
 }

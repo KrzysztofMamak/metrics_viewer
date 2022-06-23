@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:metrics_viewer/injection/injection.dart';
 import 'package:metrics_viewer/signup_form_bloc/signup_form_bloc.dart';
+import 'package:metrics_viewer/util/ext/build_context_ext.dart';
 
 class RegistrationPage extends HookWidget {
-  const RegistrationPage({
+  RegistrationPage({
     Key? key,
   }) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,53 +41,68 @@ class RegistrationPage extends HookWidget {
                   } else if (state.authFailureOrSuccessOption.isSome()) {
                     return Icon(Icons.clear);
                   }
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          hintText: 'Email',
+                  return Form(
+                    key: _formKey,
+                    autovalidateMode: state.showErrorMessages
+                        ? AutovalidateMode.always
+                        : AutovalidateMode.disabled,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: emailController,
+                          validator: context.validator.validateEmailAddress,
+                          decoration: InputDecoration(
+                            hintText: 'Email',
+                          ),
+                          onChanged: (val) {
+                            context
+                                .read<SignupFormBloc>()
+                                .add(EmailChanged(val));
+                          },
                         ),
-                        onChanged: (val) {
-                          context.read<SignupFormBloc>().add(EmailChanged(val));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          hintText: 'Password',
+                        const SizedBox(
+                          height: 20,
                         ),
-                        onChanged: (val) {
-                          context
-                              .read<SignupFormBloc>()
-                              .add(PasswordChanged(val));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: repeatedPasswordController,
-                        decoration: InputDecoration(
-                          hintText: 'Repeat password',
+                        TextFormField(
+                          controller: passwordController,
+                          validator: context.validator.validatePassword,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                          ),
+                          onChanged: (val) {
+                            context
+                                .read<SignupFormBloc>()
+                                .add(PasswordChanged(val));
+                          },
                         ),
-                        onChanged: (val) {
-                          context
-                              .read<SignupFormBloc>()
-                              .add(PasswordChanged(val));
-                        },
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<SignupFormBloc>().add(SignupPressed());
-                        },
-                        child: const Text('REGISTER'),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: repeatedPasswordController,
+                          validator: (value) =>
+                              context.validator.validateRepeatedPassword(
+                            repeatedPasswordController.text,
+                            value,
+                          ),
+                          decoration: InputDecoration(
+                            hintText: 'Repeat password',
+                          ),
+                          onChanged: (val) {
+                            context
+                                .read<SignupFormBloc>()
+                                .add(RepeatedPasswordChanged(val));
+                          },
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.read<SignupFormBloc>().add(SignupPressed());
+                          },
+                          child: const Text('REGISTER'),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
