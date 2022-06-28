@@ -46,7 +46,6 @@ linter:
     - curly_braces_in_flow_control_structures
     - deprecated_consistency
     - directives_ordering
-    - do_not_use_environment
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
@@ -86,7 +85,6 @@ linter:
     - prefer_const_constructors_in_immutables
     - prefer_const_declarations
     - prefer_const_literals_to_create_immutables
-    - prefer_constructors_over_static_methods
     - prefer_contains
     - prefer_equal_for_default_values
     - prefer_final_fields
