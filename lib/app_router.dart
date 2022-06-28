@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:metrics_viewer/auth_guard.dart';
 import 'package:metrics_viewer/home_page.dart';
-import 'package:flutter/material.dart';
 import 'package:metrics_viewer/login_page.dart';
 import 'package:metrics_viewer/registration_page.dart';
 

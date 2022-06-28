@@ -1,3 +1,5 @@
+import 'dart:async' show unawaited;
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -32,7 +34,7 @@ class AuthRepository implements IAuthRepository {
   Future<Either<AuthFailure, Unit>> signIn(LoginRequest loginRequest) async {
     try {
       final result = await _authApi.signIn(loginRequest);
-      _sharedPreferences.setString(SPKeys.authToken, result);
+      unawaited(_sharedPreferences.setString(SPKeys.authToken, result));
       return right(unit);
     } catch (e) {
       return left(AuthFailure());

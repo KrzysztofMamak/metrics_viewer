@@ -26,7 +26,7 @@ class RegistrationPage extends HookWidget {
           child: Padding(
             padding: const EdgeInsets.all(30),
             child: Container(
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                 maxWidth: 600,
               ),
               padding: const EdgeInsets.all(20),
@@ -37,9 +37,9 @@ class RegistrationPage extends HookWidget {
               child: BlocBuilder<SignupFormBloc, SignupFormState>(
                 builder: (context, state) {
                   if (state.isSubmitting) {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   } else if (state.authFailureOrSuccessOption.isSome()) {
-                    return Icon(Icons.clear);
+                    return const Icon(Icons.clear);
                   }
                   return Form(
                     key: _formKey,
@@ -52,7 +52,7 @@ class RegistrationPage extends HookWidget {
                         TextFormField(
                           controller: emailController,
                           validator: context.validator.validateEmailAddress,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Email',
                           ),
                           onChanged: (val) {
@@ -68,7 +68,7 @@ class RegistrationPage extends HookWidget {
                           controller: passwordController,
                           validator: context.validator.validatePassword,
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Password',
                           ),
                           onChanged: (val) {
@@ -88,7 +88,7 @@ class RegistrationPage extends HookWidget {
                             value,
                           ),
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Repeat password',
                           ),
                           onChanged: (val) {
@@ -102,7 +102,9 @@ class RegistrationPage extends HookWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.read<SignupFormBloc>().add(SignupPressed());
+                            context
+                                .read<SignupFormBloc>()
+                                .add(const SignupPressed());
                           },
                           child: const Text('REGISTER'),
                         ),

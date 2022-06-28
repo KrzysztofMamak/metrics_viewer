@@ -6,11 +6,11 @@ class Validator {
 
   static Validator? _instance;
 
-  AppLocalizations _loc;
+  final AppLocalizations _loc;
 
-  static get(AppLocalizations loc) =>
+  static Validator get(AppLocalizations loc) =>
       _instance ??= _instance?._loc.localeName == loc.localeName
-          ? _instance
+          ? _instance!
           : Validator._(loc);
 
   String? validateEmailAddress(String? emailAddress) {
